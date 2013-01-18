@@ -15,3 +15,11 @@ web/bundles/*
 # Configuration files
 app/config/parameters.ini
 app/config/parameters.yml
+
+server/web/bundles/
+server/app/bootstrap.php.cache
+server/app/cache/*
+server/app/logs/*
+server/build/
+server/vendor
+server/composer.phar
