@@ -7,6 +7,9 @@
 namespace Wirelust\HexHunterBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\ManyToMany;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\JoinTable;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
@@ -41,7 +44,16 @@ class Account
 	/**
 	 * @ORM\OneToMany(targetEntity="File", mappedBy="account")
 	 */
-	private $files;
+	protected $files;
+
+	/**
+	 * @ORM\ManyToMany(targetEntity="File")
+	 * @JoinTable(name="accounts_files",
+	 *      joinColumns={@JoinColumn(name="account_id", referencedColumnName="id")},
+	 *      inverseJoinColumns={@JoinColumn(name="file_id", referencedColumnName="id")}
+	 *      )
+	 **/
+	protected $starred_files;
 
 	/**
 	 * @ORM\Column(type="string", length=100)
@@ -67,6 +79,11 @@ class Account
 	 * @ORM\Column(type="string", length=100)
 	 */
 	protected $password_salt;
+
+	/**
+	 * @ORM\OneToMany(targetEntity="Note", mappedBy="account")
+	 */
+	private $notes;
 
 	/**
 	 * @var datetime $created
@@ -168,228 +185,295 @@ class Account
 	{
 		return $this->website;
 	}
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->files = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-    
-    /**
-     * Set location
-     *
-     * @param string $location
-     * @return Account
-     */
-    public function setLocation($location)
-    {
-        $this->location = $location;
-    
-        return $this;
-    }
 
-    /**
-     * Get location
-     *
-     * @return string 
-     */
-    public function getLocation()
-    {
-        return $this->location;
-    }
+	/**
+	 * Constructor
+	 */
+	public function __construct()
+	{
+		$this->files = new \Doctrine\Common\Collections\ArrayCollection();
+	}
 
-    /**
-     * Set bio
-     *
-     * @param string $bio
-     * @return Account
-     */
-    public function setBio($bio)
-    {
-        $this->bio = $bio;
-    
-        return $this;
-    }
+	/**
+	 * Set location
+	 *
+	 * @param string $location
+	 * @return Account
+	 */
+	public function setLocation($location)
+	{
+		$this->location = $location;
 
-    /**
-     * Get bio
-     *
-     * @return string 
-     */
-    public function getBio()
-    {
-        return $this->bio;
-    }
+		return $this;
+	}
 
-    /**
-     * Set email
-     *
-     * @param string $email
-     * @return Account
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-    
-        return $this;
-    }
+	/**
+	 * Get location
+	 *
+	 * @return string
+	 */
+	public function getLocation()
+	{
+		return $this->location;
+	}
 
-    /**
-     * Get email
-     *
-     * @return string 
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
+	/**
+	 * Set bio
+	 *
+	 * @param string $bio
+	 * @return Account
+	 */
+	public function setBio($bio)
+	{
+		$this->bio = $bio;
 
-    /**
-     * Set password
-     *
-     * @param string $password
-     * @return Account
-     */
-    public function setPassword($password)
-    {
-        $this->password = $password;
-    
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Get password
-     *
-     * @return string 
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
+	/**
+	 * Get bio
+	 *
+	 * @return string
+	 */
+	public function getBio()
+	{
+		return $this->bio;
+	}
 
-    /**
-     * Set password_salt
-     *
-     * @param string $passwordSalt
-     * @return Account
-     */
-    public function setPasswordSalt($passwordSalt)
-    {
-        $this->password_salt = $passwordSalt;
-    
-        return $this;
-    }
+	/**
+	 * Set email
+	 *
+	 * @param string $email
+	 * @return Account
+	 */
+	public function setEmail($email)
+	{
+		$this->email = $email;
 
-    /**
-     * Get password_salt
-     *
-     * @return string 
-     */
-    public function getPasswordSalt()
-    {
-        return $this->password_salt;
-    }
+		return $this;
+	}
 
-    /**
-     * Set created
-     *
-     * @param \DateTime $created
-     * @return Account
-     */
-    public function setCreated($created)
-    {
-        $this->created = $created;
-    
-        return $this;
-    }
+	/**
+	 * Get email
+	 *
+	 * @return string
+	 */
+	public function getEmail()
+	{
+		return $this->email;
+	}
 
-    /**
-     * Get created
-     *
-     * @return \DateTime 
-     */
-    public function getCreated()
-    {
-        return $this->created;
-    }
+	/**
+	 * Set password
+	 *
+	 * @param string $password
+	 * @return Account
+	 */
+	public function setPassword($password)
+	{
+		$this->password = $password;
 
-    /**
-     * Set updated
-     *
-     * @param \DateTime $updated
-     * @return Account
-     */
-    public function setUpdated($updated)
-    {
-        $this->updated = $updated;
-    
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Get updated
-     *
-     * @return \DateTime 
-     */
-    public function getUpdated()
-    {
-        return $this->updated;
-    }
+	/**
+	 * Get password
+	 *
+	 * @return string
+	 */
+	public function getPassword()
+	{
+		return $this->password;
+	}
 
-    /**
-     * Set date_login
-     *
-     * @param \DateTime $dateLogin
-     * @return Account
-     */
-    public function setDateLogin($dateLogin)
-    {
-        $this->date_login = $dateLogin;
-    
-        return $this;
-    }
+	/**
+	 * Set password_salt
+	 *
+	 * @param string $passwordSalt
+	 * @return Account
+	 */
+	public function setPasswordSalt($passwordSalt)
+	{
+		$this->password_salt = $passwordSalt;
 
-    /**
-     * Get date_login
-     *
-     * @return \DateTime 
-     */
-    public function getDateLogin()
-    {
-        return $this->date_login;
-    }
+		return $this;
+	}
 
-    /**
-     * Add files
-     *
-     * @param \Wirelust\HexHunterBundle\Entity\File $files
-     * @return Account
-     */
-    public function addFile(\Wirelust\HexHunterBundle\Entity\File $files)
-    {
-        $this->files[] = $files;
-    
-        return $this;
-    }
+	/**
+	 * Get password_salt
+	 *
+	 * @return string
+	 */
+	public function getPasswordSalt()
+	{
+		return $this->password_salt;
+	}
 
-    /**
-     * Remove files
-     *
-     * @param \Wirelust\HexHunterBundle\Entity\File $files
-     */
-    public function removeFile(\Wirelust\HexHunterBundle\Entity\File $files)
-    {
-        $this->files->removeElement($files);
-    }
+	/**
+	 * Set created
+	 *
+	 * @param \DateTime $created
+	 * @return Account
+	 */
+	public function setCreated($created)
+	{
+		$this->created = $created;
 
-    /**
-     * Get files
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getFiles()
-    {
-        return $this->files;
-    }
+		return $this;
+	}
+
+	/**
+	 * Get created
+	 *
+	 * @return \DateTime
+	 */
+	public function getCreated()
+	{
+		return $this->created;
+	}
+
+	/**
+	 * Set updated
+	 *
+	 * @param \DateTime $updated
+	 * @return Account
+	 */
+	public function setUpdated($updated)
+	{
+		$this->updated = $updated;
+
+		return $this;
+	}
+
+	/**
+	 * Get updated
+	 *
+	 * @return \DateTime
+	 */
+	public function getUpdated()
+	{
+		return $this->updated;
+	}
+
+	/**
+	 * Set date_login
+	 *
+	 * @param \DateTime $dateLogin
+	 * @return Account
+	 */
+	public function setDateLogin($dateLogin)
+	{
+		$this->date_login = $dateLogin;
+
+		return $this;
+	}
+
+	/**
+	 * Get date_login
+	 *
+	 * @return \DateTime
+	 */
+	public function getDateLogin()
+	{
+		return $this->date_login;
+	}
+
+	/**
+	 * Add files
+	 *
+	 * @param \Wirelust\HexHunterBundle\Entity\File $files
+	 * @return Account
+	 */
+	public function addFile(\Wirelust\HexHunterBundle\Entity\File $files)
+	{
+		$this->files[] = $files;
+
+		return $this;
+	}
+
+	/**
+	 * Remove files
+	 *
+	 * @param \Wirelust\HexHunterBundle\Entity\File $files
+	 */
+	public function removeFile(\Wirelust\HexHunterBundle\Entity\File $files)
+	{
+		$this->files->removeElement($files);
+	}
+
+	/**
+	 * Get files
+	 *
+	 * @return \Doctrine\Common\Collections\Collection
+	 */
+	public function getFiles()
+	{
+		return $this->files;
+	}
+
+	/**
+	 * Add notes
+	 *
+	 * @param \Wirelust\HexHunterBundle\Entity\Note $notes
+	 * @return Account
+	 */
+	public function addNote(\Wirelust\HexHunterBundle\Entity\Note $notes)
+	{
+		$this->notes[] = $notes;
+
+		return $this;
+	}
+
+	/**
+	 * Remove notes
+	 *
+	 * @param \Wirelust\HexHunterBundle\Entity\Note $notes
+	 */
+	public function removeNote(\Wirelust\HexHunterBundle\Entity\Note $notes)
+	{
+		$this->notes->removeElement($notes);
+	}
+
+	/**
+	 * Get notes
+	 *
+	 * @return \Doctrine\Common\Collections\Collection
+	 */
+	public function getNotes()
+	{
+		return $this->notes;
+	}
+
+	/**
+	 * Add starred_files
+	 *
+	 * @param \Wirelust\HexHunterBundle\Entity\File $starredFiles
+	 * @return Account
+	 */
+	public function addStarredFile(\Wirelust\HexHunterBundle\Entity\File $starredFiles)
+	{
+		$this->starred_files[] = $starredFiles;
+
+		return $this;
+	}
+
+	/**
+	 * Remove starred_files
+	 *
+	 * @param \Wirelust\HexHunterBundle\Entity\File $starredFiles
+	 */
+	public function removeStarredFile(\Wirelust\HexHunterBundle\Entity\File $starredFiles)
+	{
+		$this->starred_files->removeElement($starredFiles);
+	}
+
+	/**
+	 * Get starred_files
+	 *
+	 * @return \Doctrine\Common\Collections\Collection
+	 */
+	public function getStarredFiles()
+	{
+		return $this->starred_files;
+	}
 }

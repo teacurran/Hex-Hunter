@@ -1,3 +1,10 @@
+
+hexhunter_rest_account_register:
+    pattern: /register/{name}
+    type:     rest
+    defaults:  { _controller: WirelustHexHunterBundle:Account:register }
+
+
 wirelust_hex_hunter:
     resource: "@WirelustHexHunterBundle/Controller/"
     type:     annotation

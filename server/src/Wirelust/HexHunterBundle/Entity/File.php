@@ -7,6 +7,9 @@
 namespace Wirelust\HexHunterBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\ManyToMany;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\JoinTable;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
@@ -64,6 +67,15 @@ class File
 	 */
 	protected $is_public;
 
+	/**
+	 * @ORM\OneToMany(targetEntity="Note", mappedBy="file")
+	 */
+	private $notes;
+
+	/**
+	 * @ORM\OneToMany(targetEntity="Account", mappedBy="starred_files")
+	 **/
+	protected $accounts_starred;
 
     /**
      * Get id
@@ -234,5 +246,78 @@ class File
     public function getLocation()
     {
         return $this->location;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->notes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add notes
+     *
+     * @param \Wirelust\HexHunterBundle\Entity\Note $notes
+     * @return File
+     */
+    public function addNote(\Wirelust\HexHunterBundle\Entity\Note $notes)
+    {
+        $this->notes[] = $notes;
+    
+        return $this;
+    }
+
+    /**
+     * Remove notes
+     *
+     * @param \Wirelust\HexHunterBundle\Entity\Note $notes
+     */
+    public function removeNote(\Wirelust\HexHunterBundle\Entity\Note $notes)
+    {
+        $this->notes->removeElement($notes);
+    }
+
+    /**
+     * Get notes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getNotes()
+    {
+        return $this->notes;
+    }
+
+    /**
+     * Add accounts_starred
+     *
+     * @param \Wirelust\HexHunterBundle\Entity\Account $accountsStarred
+     * @return File
+     */
+    public function addAccountsStarred(\Wirelust\HexHunterBundle\Entity\Account $accountsStarred)
+    {
+        $this->accounts_starred[] = $accountsStarred;
+    
+        return $this;
+    }
+
+    /**
+     * Remove accounts_starred
+     *
+     * @param \Wirelust\HexHunterBundle\Entity\Account $accountsStarred
+     */
+    public function removeAccountsStarred(\Wirelust\HexHunterBundle\Entity\Account $accountsStarred)
+    {
+        $this->accounts_starred->removeElement($accountsStarred);
+    }
+
+    /**
+     * Get accounts_starred
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAccountsStarred()
+    {
+        return $this->accounts_starred;
     }
 }
