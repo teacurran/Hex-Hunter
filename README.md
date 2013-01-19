@@ -1,2 +1,2 @@
-Hex-Hunter
+Hex Hunter
 ==========
