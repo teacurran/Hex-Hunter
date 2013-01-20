@@ -1,0 +1,21 @@
+
+#hexhunter_rest_account_register:
+#    pattern: /register/{name}
+#    type:     rest
+#    defaults:  { _controller: WirelustHexHunterBundle:Account:register, _format:json }
+
+
+wirelust_hex_hunter:
+    resource: "@WirelustHexHunterApiBundle/Controller/"
+    type:     annotation
+    prefix:   /api/
+    defaults:  { _format:json }
+
+# Internal routing configuration to handle ESI
+# ****** WARNING ******
+# This route should be enabled with caution as it can open a security vulnerability
+# see http://symfony.com/blog/security-release-symfony-2-0-20-and-2-1-5-released for more information
+# ****** WARNING ******
+#_internal:
+#    resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
+#    prefix:   /_internal

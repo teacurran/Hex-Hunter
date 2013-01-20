@@ -2,6 +2,7 @@
 *.iml
 composer.phar
 *.DS_Store
+composer.lock
 
 # Bootstrap
 app/bootstrap*
