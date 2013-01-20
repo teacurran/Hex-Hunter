@@ -1,0 +1,9 @@
+Wirelust\HexHunterBundle\Model\Account:
+    getters:
+        username:
+            - NotBlank:
+        email:
+            - NotBlank:
+            - Email:
+        password:
+            - NotBlank:

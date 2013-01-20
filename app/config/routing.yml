@@ -4,12 +4,18 @@
 #    type:     rest
 #    defaults:  { _controller: WirelustHexHunterBundle:Account:register, _format:json }
 
-
 wirelust_hex_hunter:
+    resource: "@WirelustHexHunterBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+
+wirelust_hex_hunter_api:
     resource: "@WirelustHexHunterApiBundle/Controller/"
     type:     annotation
-    prefix:   /api/
-    defaults:  { _format:json }
+    prefix:   /api
+    defaults: {_format: json}
+
 
 # Internal routing configuration to handle ESI
 # ****** WARNING ******
