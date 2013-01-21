@@ -73,6 +73,11 @@ class File
 	private $notes;
 
 	/**
+	 * @ORM\OneToMany(targetEntity="Tag", mappedBy="file")
+	 */
+	private $tags;
+
+	/**
 	 * @ORM\OneToMany(targetEntity="Account", mappedBy="starred_files")
 	 **/
 	protected $accounts_starred;
@@ -319,5 +324,38 @@ class File
     public function getAccountsStarred()
     {
         return $this->accounts_starred;
+    }
+
+    /**
+     * Add tags
+     *
+     * @param \Wirelust\HexHunterBundle\Entity\Tag $tags
+     * @return File
+     */
+    public function addTag(\Wirelust\HexHunterBundle\Entity\Tag $tags)
+    {
+        $this->tags[] = $tags;
+    
+        return $this;
+    }
+
+    /**
+     * Remove tags
+     *
+     * @param \Wirelust\HexHunterBundle\Entity\Tag $tags
+     */
+    public function removeTag(\Wirelust\HexHunterBundle\Entity\Tag $tags)
+    {
+        $this->tags->removeElement($tags);
+    }
+
+    /**
+     * Get tags
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTags()
+    {
+        return $this->tags;
     }
 }

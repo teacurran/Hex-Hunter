@@ -24,26 +24,73 @@ class AccountController extends Controller
 {
 	/**
 	 * @Route("/register", name="api_account_register")
-	 * @Method({"POST", "GET"})
+	 * @Method({"POST"})
 	 * @Rest\View
 	 */
 	public function registerAction()
 	{
-		return $this->processForm(new Account());
+		return $this->processRegisterForm(new Account());
 	}
 
 	/**
-	 * @Route("/{id}/info", name="api_account_info")
+	 * @Route("/follow", name="api_account_follow")
+	 * @Method({"POST"})
+	 * @Rest\View
+	 */
+	public function followAction()
+	{
+		// TODO: implement
+		return null;
+	}
+
+	/**
+	 * @Route("/{id}/files", name="api_account_id_files")
+	 * @Method({"GET"})
+	 * @Rest\View
+	 */
+	public function filesAction($id)
+	{
+		// TODO: Implement
+
+		return null;
+	}
+
+	/**
+	 * @Route("/{id}/files", name="api_account_id_following")
+	 * @Method({"GET"})
+	 * @Rest\View
+	 */
+	public function followingAction($id)
+	{
+		// TODO: Implement
+
+		return null;
+	}
+
+	/**
+	 * @Route("/{id}/info", name="api_account_id_info")
 	 * @Method({"GET"})
 	 * @Rest\View
 	 */
 	public function infoAction($id)
 	{
+		// TODO: Implement
+
 		return array("account" => $id);
 	}
 
+	/**
+	 * @Route("/unfollow", name="api_account_unfollow")
+	 * @Method({"POST"})
+	 * @Rest\View
+	 */
+	public function unfollowAction()
+	{
+		// TODO: implement
+		return null;
+	}
 
-	private function processForm(Account $account)
+	private function processRegisterForm(Account $account)
 	{
 		$entityManager = $this->get('doctrine.orm.entity_manager');
 

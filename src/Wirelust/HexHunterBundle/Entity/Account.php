@@ -46,6 +46,21 @@ class Account
 	 */
 	protected $files;
 
+
+	/**
+	 * @ORM\ManyToMany(targetEntity="Account")
+	 * @JoinTable(name="account_following",
+	 *      joinColumns={@JoinColumn(name="account_id", referencedColumnName="id")},
+	 *      inverseJoinColumns={@JoinColumn(name="account_following_id", referencedColumnName="id")}
+	 *      )
+	 **/
+	protected $following;
+
+	/**
+	 * @ORM\OneToMany(targetEntity="Account", mappedBy="following")
+	 **/
+	protected $followers;
+
 	/**
 	 * @ORM\ManyToMany(targetEntity="File")
 	 * @JoinTable(name="accounts_files",
@@ -69,6 +84,16 @@ class Account
 	 * @ORM\Column(type="string", length=100)
 	 */
 	protected $email;
+
+	/**
+	 * @ORM\Column(type="string", length=100)
+	 */
+	protected $email_verification_code;
+
+	/**
+	 * @ORM\Column(type="boolean")
+	 */
+	protected $email_verified;
 
 	/**
 	 * @ORM\Column(type="string", length=100)
@@ -476,4 +501,116 @@ class Account
 	{
 		return $this->starred_files;
 	}
+
+    /**
+     * Set email_verification_code
+     *
+     * @param string $emailVerificationCode
+     * @return Account
+     */
+    public function setEmailVerificationCode($emailVerificationCode)
+    {
+        $this->email_verification_code = $emailVerificationCode;
+    
+        return $this;
+    }
+
+    /**
+     * Get email_verification_code
+     *
+     * @return string 
+     */
+    public function getEmailVerificationCode()
+    {
+        return $this->email_verification_code;
+    }
+
+    /**
+     * Set email_verified
+     *
+     * @param boolean $emailVerified
+     * @return Account
+     */
+    public function setEmailVerified($emailVerified)
+    {
+        $this->email_verified = $emailVerified;
+    
+        return $this;
+    }
+
+    /**
+     * Get email_verified
+     *
+     * @return boolean 
+     */
+    public function getEmailVerified()
+    {
+        return $this->email_verified;
+    }
+
+    /**
+     * Add following
+     *
+     * @param \Wirelust\HexHunterBundle\Entity\Account $following
+     * @return Account
+     */
+    public function addFollowing(\Wirelust\HexHunterBundle\Entity\Account $following)
+    {
+        $this->following[] = $following;
+    
+        return $this;
+    }
+
+    /**
+     * Remove following
+     *
+     * @param \Wirelust\HexHunterBundle\Entity\Account $following
+     */
+    public function removeFollowing(\Wirelust\HexHunterBundle\Entity\Account $following)
+    {
+        $this->following->removeElement($following);
+    }
+
+    /**
+     * Get following
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFollowing()
+    {
+        return $this->following;
+    }
+
+    /**
+     * Add followers
+     *
+     * @param \Wirelust\HexHunterBundle\Entity\Account $followers
+     * @return Account
+     */
+    public function addFollower(\Wirelust\HexHunterBundle\Entity\Account $followers)
+    {
+        $this->followers[] = $followers;
+    
+        return $this;
+    }
+
+    /**
+     * Remove followers
+     *
+     * @param \Wirelust\HexHunterBundle\Entity\Account $followers
+     */
+    public function removeFollower(\Wirelust\HexHunterBundle\Entity\Account $followers)
+    {
+        $this->followers->removeElement($followers);
+    }
+
+    /**
+     * Get followers
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFollowers()
+    {
+        return $this->followers;
+    }
 }
