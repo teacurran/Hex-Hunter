@@ -28,7 +28,7 @@ class Account
 	protected $id;
 
 	/**
-	 * @ORM\Column(type="string", length=100)
+	 * @ORM\Column(type="string", length=100, unique=true)
 	 * @Assert\NotBlank()
 	 * @Assert\Length(
 	 * 		min="3",
@@ -41,12 +41,12 @@ class Account
 	protected $username;
 
 	/**
-	 * @ORM\Column(type="string", length=100)
+	 * @ORM\Column(type="string", length=100, nullable=true)
 	 */
 	protected $full_name;
 
 	/**
-	 * @ORM\Column(type="string", length=100)
+	 * @ORM\Column(type="string", length=100, nullable=true)
 	 */
 	protected $website;
 
@@ -80,31 +80,31 @@ class Account
 	protected $starred_files;
 
 	/**
-	 * @ORM\Column(type="string", length=100)
+	 * @ORM\Column(type="string", length=100, nullable=true)
 	 */
 	protected $location;
 
 	/**
-	 * @ORM\Column(type="text")
+	 * @ORM\Column(type="text", nullable=true)
 	 */
 	protected $bio;
 
 	/**
-	 * @ORM\Column(type="string", length=100)
+	 * @ORM\Column(type="string", length=100, unique=true)
 	 * @Assert\NotBlank()
 	 * @Assert\email()
 	 */
 	protected $email;
 
 	/**
-	 * @ORM\Column(type="string", length=100)
+	 * @ORM\Column(type="string", length=100, nullable=true)
 	 */
 	protected $email_verification_code;
 
 	/**
 	 * @ORM\Column(type="boolean")
 	 */
-	protected $email_verified;
+	protected $email_verified = false;
 
 	/**
 	 * @ORM\Column(type="string", length=100)
@@ -113,7 +113,7 @@ class Account
 	protected $password;
 
 	/**
-	 * @ORM\Column(type="string", length=100)
+	 * @ORM\Column(type="string", length=100, nullable=true)
 	 */
 	protected $password_salt;
 
@@ -122,24 +122,26 @@ class Account
 	 */
 	private $notes;
 
+	// TODO: figure out why Timestampable isn't populating
 	/**
 	 * @var datetime $created
 	 *
 	 * @Gedmo\Timestampable(on="create")
-	 * @ORM\Column(type="datetime")
+	 * @ORM\Column(type="datetime", nullable=true)
 	 */
 	protected $created;
 
+	// TODO: figure out why Timestampable isn't populating
 	/**
 	 * @var datetime $updated
 	 *
 	 * @Gedmo\Timestampable(on="update")
-	 * @ORM\Column(type="datetime")
+	 * @ORM\Column(type="datetime", nullable=true)
 	 */
 	protected $updated;
 
 	/**
-	 * @ORM\Column(type="datetime")
+	 * @ORM\Column(type="datetime", nullable=true)
 	 */
 	protected $date_login;
 

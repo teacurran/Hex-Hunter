@@ -32,9 +32,15 @@ class ApiAccountControllerTest extends BaseTestCase
 		$this->assertEquals(405, $client->getResponse()->getStatusCode());
 
 		// Register
-		$crawler = $client->request('POST', '/api/account/register');
-		echo "TEST: " . $client->getResponse()->getContent();
+		$crawler = $client->request('POST', '/api/account/register',
+			array(
+				  'username' => 'TestUsername'
+				, 'email' => 'test@hexhunter.org'
+				, 'password' => 'password123'
+			)
+		);
+		echo "register response: " . $client->getResponse()->getContent();
+		$this->assertEquals(201, $client->getResponse()->getStatusCode());
 
-		$this->assertEquals(405, $client->getResponse()->getStatusCode());
 	}
 }

@@ -35,6 +35,6 @@ class AccountType extends AbstractType
 
     public function getName()
     {
-        return 'wirelust_hexhunterbundle_accounttype';
+        return '';
     }
 }

@@ -111,10 +111,10 @@ class AccountController extends Controller
 				)
 			);
 
+			$entityManager->flush();
+
 			return $response;
 		}
-
-		$entityManager->flush();
 
 		return View::create($form, 400);
 	}
