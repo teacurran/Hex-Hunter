@@ -106,7 +106,7 @@ class AccountController extends Controller
 			$response->setStatusCode($statusCode);
 			$response->headers->set('Location',
 				$this->generateUrl(
-					'api_account_info', array('id' => $account->getId()),
+					'api_account_id_info', array('id' => $account->getId()),
 					true // absolute
 				)
 			);

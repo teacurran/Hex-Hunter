@@ -23,7 +23,8 @@
         "kriswallsmith/assetic": "1.1.*@dev",
 		"gedmo/doctrine-extensions": "2.3.3",
 		"nelmio/api-doc-bundle": "dev-master",
-		"friendsofsymfony/rest-bundle": "dev-master"
+		"friendsofsymfony/rest-bundle": "dev-master",
+		"phpunit/phpunit": "3.7.*"
 	},
     "scripts": {
         "post-install-cmd": [
@@ -36,7 +37,7 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequiremeX`ntsFile"
         ]
     },
     "extra": {

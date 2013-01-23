@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping\ManyToMany;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\JoinTable;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -28,7 +29,15 @@ class Account
 
 	/**
 	 * @ORM\Column(type="string", length=100)
-	 */
+	 * @Assert\NotBlank()
+	 * @Assert\Length(
+	 * 		min="3",
+	 * 		max="20"
+	 * )
+	 * @Assert\Regex(
+	 *     pattern="/^[A-Za-z0-9][A-Za-z0-9\x22]*$/"
+	 * )
+	 * */
 	protected $username;
 
 	/**
@@ -82,6 +91,8 @@ class Account
 
 	/**
 	 * @ORM\Column(type="string", length=100)
+	 * @Assert\NotBlank()
+	 * @Assert\email()
 	 */
 	protected $email;
 
@@ -97,6 +108,7 @@ class Account
 
 	/**
 	 * @ORM\Column(type="string", length=100)
+	 * @Assert\NotBlank()
 	 */
 	protected $password;
 
