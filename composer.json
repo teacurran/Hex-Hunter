@@ -9,6 +9,9 @@
         "symfony/symfony": "2.1.*",
         "doctrine/orm": ">=2.2.3,<2.4-dev",
         "doctrine/doctrine-bundle": "1.1.*",
+		"doctrine/doctrine-fixtures-bundle": "dev-master",
+		"doctrine/data-fixtures": "dev-master",
+		"friendsofsymfony/user-bundle": "dev-master",
         "twig/extensions": "1.0.*@dev",
         "symfony/assetic-bundle": "2.1.*",
         "symfony/swiftmailer-bundle": "2.1.*",
@@ -24,7 +27,10 @@
 		"stof/doctrine-extensions-bundle": "dev-master",
 		"nelmio/api-doc-bundle": "dev-master",
 		"friendsofsymfony/rest-bundle": "dev-master",
-		"phpunit/phpunit": "3.7.*"
+		"phpunit/phpunit": "3.7.*",
+		"cedriclombardot/admingenerator-generator-bundle": "dev-master",
+		"cedriclombardot/twig-generator": "dev-master",
+		"cedriclombardot/admingenerator-user-bundle": "dev-master"
 	},
     "scripts": {
         "post-install-cmd": [

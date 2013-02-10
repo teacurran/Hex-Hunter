@@ -31,8 +31,8 @@ class Account
 	 * @ORM\Column(type="string", length=100, unique=true)
 	 * @Assert\NotBlank()
 	 * @Assert\Length(
-	 * 		min="3",
-	 * 		max="20"
+	 *         min="3",
+	 *         max="20"
 	 * )
 	 * @Assert\Regex(
 	 *     pattern="/^[A-Za-z0-9][A-Za-z0-9\x22]*$/"
@@ -516,115 +516,115 @@ class Account
 		return $this->starred_files;
 	}
 
-    /**
-     * Set email_verification_code
-     *
-     * @param string $emailVerificationCode
-     * @return Account
-     */
-    public function setEmailVerificationCode($emailVerificationCode)
-    {
-        $this->email_verification_code = $emailVerificationCode;
-    
-        return $this;
-    }
+	/**
+	 * Set email_verification_code
+	 *
+	 * @param string $emailVerificationCode
+	 * @return Account
+	 */
+	public function setEmailVerificationCode($emailVerificationCode)
+	{
+		$this->email_verification_code = $emailVerificationCode;
 
-    /**
-     * Get email_verification_code
-     *
-     * @return string 
-     */
-    public function getEmailVerificationCode()
-    {
-        return $this->email_verification_code;
-    }
+		return $this;
+	}
 
-    /**
-     * Set email_verified
-     *
-     * @param boolean $emailVerified
-     * @return Account
-     */
-    public function setEmailVerified($emailVerified)
-    {
-        $this->email_verified = $emailVerified;
-    
-        return $this;
-    }
+	/**
+	 * Get email_verification_code
+	 *
+	 * @return string
+	 */
+	public function getEmailVerificationCode()
+	{
+		return $this->email_verification_code;
+	}
 
-    /**
-     * Get email_verified
-     *
-     * @return boolean 
-     */
-    public function getEmailVerified()
-    {
-        return $this->email_verified;
-    }
+	/**
+	 * Set email_verified
+	 *
+	 * @param boolean $emailVerified
+	 * @return Account
+	 */
+	public function setEmailVerified($emailVerified)
+	{
+		$this->email_verified = $emailVerified;
 
-    /**
-     * Add following
-     *
-     * @param \Wirelust\HexHunterBundle\Entity\Account $following
-     * @return Account
-     */
-    public function addFollowing(\Wirelust\HexHunterBundle\Entity\Account $following)
-    {
-        $this->following[] = $following;
-    
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Remove following
-     *
-     * @param \Wirelust\HexHunterBundle\Entity\Account $following
-     */
-    public function removeFollowing(\Wirelust\HexHunterBundle\Entity\Account $following)
-    {
-        $this->following->removeElement($following);
-    }
+	/**
+	 * Get email_verified
+	 *
+	 * @return boolean
+	 */
+	public function getEmailVerified()
+	{
+		return $this->email_verified;
+	}
 
-    /**
-     * Get following
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getFollowing()
-    {
-        return $this->following;
-    }
+	/**
+	 * Add following
+	 *
+	 * @param \Wirelust\HexHunterBundle\Entity\Account $following
+	 * @return Account
+	 */
+	public function addFollowing(\Wirelust\HexHunterBundle\Entity\Account $following)
+	{
+		$this->following[] = $following;
 
-    /**
-     * Add followers
-     *
-     * @param \Wirelust\HexHunterBundle\Entity\Account $followers
-     * @return Account
-     */
-    public function addFollower(\Wirelust\HexHunterBundle\Entity\Account $followers)
-    {
-        $this->followers[] = $followers;
-    
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Remove followers
-     *
-     * @param \Wirelust\HexHunterBundle\Entity\Account $followers
-     */
-    public function removeFollower(\Wirelust\HexHunterBundle\Entity\Account $followers)
-    {
-        $this->followers->removeElement($followers);
-    }
+	/**
+	 * Remove following
+	 *
+	 * @param \Wirelust\HexHunterBundle\Entity\Account $following
+	 */
+	public function removeFollowing(\Wirelust\HexHunterBundle\Entity\Account $following)
+	{
+		$this->following->removeElement($following);
+	}
 
-    /**
-     * Get followers
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getFollowers()
-    {
-        return $this->followers;
-    }
+	/**
+	 * Get following
+	 *
+	 * @return \Doctrine\Common\Collections\Collection
+	 */
+	public function getFollowing()
+	{
+		return $this->following;
+	}
+
+	/**
+	 * Add followers
+	 *
+	 * @param \Wirelust\HexHunterBundle\Entity\Account $followers
+	 * @return Account
+	 */
+	public function addFollower(\Wirelust\HexHunterBundle\Entity\Account $followers)
+	{
+		$this->followers[] = $followers;
+
+		return $this;
+	}
+
+	/**
+	 * Remove followers
+	 *
+	 * @param \Wirelust\HexHunterBundle\Entity\Account $followers
+	 */
+	public function removeFollower(\Wirelust\HexHunterBundle\Entity\Account $followers)
+	{
+		$this->followers->removeElement($followers);
+	}
+
+	/**
+	 * Get followers
+	 *
+	 * @return \Doctrine\Common\Collections\Collection
+	 */
+	public function getFollowers()
+	{
+		return $this->followers;
+	}
 }
